@@ -4,6 +4,8 @@
 
 #include "integer.h"
 
+#define MIN(x,y)  ((x)<(y) ? (x) : (y))
+#define MAX(x,y)  ((x)>(y) ? (x) : (y))
 
 int main (int argc, const char * argv[])
 {
@@ -18,23 +20,19 @@ int main (int argc, const char * argv[])
  */
     op = "+";
     
-    a = new_integer_from_string("b111111111111111", TYPE_BIN);
-    b = new_integer_from_string("-b111111111111111", TYPE_BIN);
+    a = new_integer_from_string("b01001111", TYPE_BIN);
+    b = new_integer_from_string("-b00100011", TYPE_BIN);
     result = new_integer(MAX(a.segments, b.segments) + 1);
     
-    add_integer(a, b, result);
-    
-    /*                 01000001010000100100001101000100
-                       01000001010000100100001101000100
-       000000000000000010000010100001001000011010001000
-     */
-    
-    print_integer(a);
-    print_integer(b);
-    print_integer(result);
-    twos_complement_integer(result);
-    print_integer(result);
-    
+    subtract_integer(a, b, &result);
+    print_integer_binary(a);
+    print_integer_decimal(a);
+    print_integer_binary(b);
+    print_integer_decimal(b);
+    print_integer_binary(result);
+    print_integer_decimal(result);
+
+
     return 0;
 }
 
