@@ -32,6 +32,7 @@ void copy_integer(integer source, integer target);
 void free_integer(integer f);
 void twos_complement_integer(integer res);
 int is_negative(integer res);
+int compare_integers(integer left, integer right);
 
 void print_integer_binary(integer res);
 void print_integer_decimal(integer x);
@@ -39,14 +40,18 @@ void print_integer_decimal(integer x);
 
 integer new_integer_from_string(char *str, int type);
 integer new_integer_from_binary_string(char *str, int type);
-integer new_integer_from_hex_string(char *str, int type);
+/*integer new_integer_from_hex_string(char *str, int type);
 integer new_integer_from_dec_string(char *str, int type);
-integer new_integer_from_oct_string(char *str, int type);
+integer new_integer_from_oct_string(char *str, int type);*/
 
 
 void add_integer(integer left, integer right, integer *result);
+void simple_add_integer(integer top, integer bottom, integer *result);
+
 void subtract_integer(integer left, integer right, integer *result);
 unit mod_small_integer(integer left, unit right);
 void divide_small_integer(integer left, unit right, integer result);
+
+void shift_integer_right(integer x);
 
 #endif

@@ -9,7 +9,6 @@
 
 int main (int argc, const char * argv[])
 {
-    char *op = (char *)malloc(2 * sizeof(char));
     integer a, b, result;
     
 /*    if(argc == 0 || argc > 4 || strcmp(argv[1], "-h") == 0) {
@@ -18,21 +17,20 @@ int main (int argc, const char * argv[])
         op = strcpy(op, argv[1]);
     }
  */
-    op = "+";
     
-    a = new_integer_from_string("b01001111", TYPE_BIN);
-    b = new_integer_from_string("-b00100011", TYPE_BIN);
+    a = new_integer_from_string("-b001000000010101101110110011011001001100100101111010010000100011111110010010001111101000101111100011010", TYPE_BIN);
+    b = new_integer_from_string("-b1010010010110100010100101010101000000011111001011100011101011110100010010101010010100000101111111101001010010000001111111110000101001010100011", TYPE_BIN);
+    
     result = new_integer(MAX(a.segments, b.segments) + 1);
     
-    subtract_integer(a, b, &result);
-    print_integer_binary(a);
     print_integer_decimal(a);
-    print_integer_binary(b);
     print_integer_decimal(b);
-    print_integer_binary(result);
+    
+    simple_add_integer(a, b, &result);
+    
+    printf("-----------------\n");
     print_integer_decimal(result);
-
-
+    
     return 0;
 }
 
