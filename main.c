@@ -10,26 +10,37 @@
 int main (int argc, const char * argv[])
 {
     integer a, b, result;
-    
-/*    if(argc == 0 || argc > 4 || strcmp(argv[1], "-h") == 0) {
-        print_help();
-    } else if  {
-        op = strcpy(op, argv[1]);
+        
+    if(argc == 1 || argc > 5 || strcmp(argv[1], "-h") == 0) {
+       fprintf(stderr, "ERROR: Incorrect usage\n\ncalc usage:\n\tcalc <+/-> <?-(b|d|o|x)number> <?-(b|d|o|x)number> (b|d|o|x)\n");
+        return 0;
     }
- */
     
-    a = new_integer_from_string("-b001000000010101101110110011011001001100100101111010010000100011111110010010001111101000101111100011010", TYPE_BIN);
-    b = new_integer_from_string("-b1010010010110100010100101010101000000011111001011100011101011110100010010101010010100000101111111101001010010000001111111110000101001010100011", TYPE_BIN);
-    
+        
+    a = new_integer_from_string((char *)argv[2], (argv[2][0] == '-' ? argv[2][1] : argv[2][0]));
+    b = new_integer_from_string((char *)argv[3], (argv[3][0] == '-' ? argv[3][1] : argv[3][0])); 
     result = new_integer(MAX(a.segments, b.segments) + 1);
     
-    print_integer_decimal(a);
-    print_integer_decimal(b);
+    if(argv[1][0] == '-') twos_complement_integer(b);
     
     simple_add_integer(a, b, &result);
     
-    printf("-----------------\n");
-    print_integer_decimal(result);
+    switch(argv[4][0]) {
+        case 'd':
+            print_integer_decimal(result);
+            break;
+        case 'x':
+            print_integer_hexadecimal(result);
+            break;
+        case 'b':
+            print_integer_binary(result);
+            break;
+        case 'o':
+            print_integer_octal(result);
+            break;
+        default:
+            fprintf(stderr, "ERROR: %c is not a valid output format.\n", argv[4][0]);
+    }
     
     return 0;
 }
